@@ -1,0 +1,1845 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tanzeel’s Store — E‑Commerce + Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0b0f14;
+            --surface: #121825;
+            --surface-2: #101521;
+            --text: #e6ecf3;
+            --muted: #afbbca;
+            --brand: #7c5cff;
+            --brand-2: #22d3ee;
+            --accent: #16a34a;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --grad-1: linear-gradient(135deg, #111827 0%, #0b1220 40%, #101827 100%);
+            --grad-brand: radial-gradient(1200px 600px at 0% 0%, rgba(124, 92, 255, 0.18), transparent 60%), radial-gradient(800px 400px at 100% 100%, rgba(34, 211, 238, 0.15), transparent 60%);
+            --btn-bg: #1f2937;
+            --btn-hover: #263244;
+            --link: #93c5fd;
+            --star: #fbbf24;
+        }
+
+        [data-theme="light"] {
+            --bg: #fdfbff;
+            --surface: #ffffff;
+            --surface-2: #f8fbff;
+            --text: #0b1220;
+            --muted: #415168;
+            --brand: #6d28d9;
+            --brand-2: #0891b2;
+            --accent: #16a34a;
+            --danger: #b91c1c;
+            --warning: #b45309;
+            --card: rgba(0, 0, 0, 0.04);
+            --border: rgba(0, 0, 0, 0.10);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+            --grad-1: linear-gradient(160deg, #fff7ed 0%, #fce7f3 35%, #e0f2fe 70%, #e9d5ff 100%);
+            --grad-brand: radial-gradient(900px 500px at 10% 0%, rgba(234, 179, 8, 0.25), transparent 60%), radial-gradient(900px 500px at 100% 100%, rgba(59, 130, 246, 0.22), transparent 60%), radial-gradient(700px 360px at 0% 100%, rgba(147, 51, 234, 0.18), transparent 60%);
+            --btn-bg: #ffffff;
+            --btn-hover: #f3f4f6;
+            --link: #1d4ed8;
+            --star: #f59e0b;
+        }
+
+        html,
+        body {
+            height: 100%;
+            scroll-behavior: smooth;
+            background: var(--bg);
+            color: var(--text);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -12px;
+        }
+
+        .col-12 {
+            width: 100%;
+            padding: 12px;
+        }
+
+        .col-6 {
+            width: 50%;
+            padding: 12px;
+        }
+
+        .col-4 {
+            width: 33.3333%;
+            padding: 12px;
+        }
+
+        .col-3 {
+            width: 25%;
+            padding: 12px;
+        }
+
+        @media (max-width: 991px) {
+            .col-lg-3 {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                width: 25%;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .col-6,
+            .col-4,
+            .col-3 {
+                width: 100%;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: saturate(120%) blur(8px);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: #fff;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: conic-gradient(from 0deg, #7c5cff, #22d3ee, #16a34a, #7c5cff);
+            animation: spin 8s linear infinite;
+        }
+
+        .logo::after {
+            content: "TS";
+            position: absolute;
+            inset: 5px;
+            display: grid;
+            place-items: center;
+            background: var(--surface);
+            border-radius: 50%;
+            color: var(--brand);
+            font-weight: 900;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            animation: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .brand-name {
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: .2s;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: var(--card);
+            text-decoration: none;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            content: "▾";
+            margin-left: 6px;
+            font-size: 12px;
+            opacity: .8;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            min-width: 220px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            display: none;
+            box-shadow: var(--shadow);
+        }
+
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: var(--text);
+        }
+
+        .dropdown-item:hover {
+            background: var(--card);
+            text-decoration: none;
+        }
+
+        .right-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            border: 1px solid var(--border);
+            background: var(--btn-bg);
+            color: var(--text);
+            padding: 8px 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: .2s;
+        }
+
+        .icon-btn:hover {
+            background: var(--btn-hover);
+        }
+
+        .badge {
+            background: var(--danger);
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                left: 0;
+                top: 100%;
+                width: 100%;
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 12px;
+            }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hamburger {
+                display: inline-flex;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 88vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(120deg, #fff7ed 0%, #fde68a 25%, #e9d5ff 55%, #bae6fd 85%);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            background: var(--grad-brand);
+            animation: floatGlow 12s ease-in-out infinite alternate;
+            filter: blur(30px);
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-2%, 2%) scale(1.05);
+            }
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            padding: 32px 16px;
+        }
+
+        .typewriter {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            letter-spacing: .5px;
+            line-height: 1.1;
+            background: linear-gradient(90deg, var(--text), color-mix(in oklab, var(--brand), var(--text) 40%));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: clamp(14px, 2.4vw, 18px);
+        }
+
+        .cta {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: 1px solid var(--border);
+            background: var(--btn-bg);
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: .2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--btn-hover);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316, #ef4444);
+            border: none;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(0.95);
+        }
+
+        /* Section titles */
+        .section {
+            padding: 64px 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .pill {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .pill.active {
+            background: color-mix(in oklab, var(--brand), transparent 80%);
+            border-color: color-mix(in oklab, var(--brand), transparent 70%);
+        }
+
+        .input {
+            width: 220px;
+            max-width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .select {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        /* Product cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 820px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.78));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, .2);
+        }
+
+        .card-media {
+            background: var(--surface-2);
+            display: grid;
+            place-items: center;
+            aspect-ratio: 4/3;
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .card-body {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .price {
+            font-weight: 800;
+        }
+
+        .brand {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .rating {
+            color: var(--star);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .alert {
+            background: color-mix(in oklab, var(--danger), transparent 85%);
+            border: 1px dashed color-mix(in oklab, var(--danger), transparent 50%);
+            color: var(--text);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        /* Modals */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            width: min(800px, 92vw);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: .2s ease;
+        }
+
+        .modal.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header,
+        .modal-footer {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border);
+            border-bottom: none;
+        }
+
+        .modal-body {
+            padding: 16px;
+            max-height: 70vh;
+            overflow: auto;
+        }
+
+        /* Product details carousel */
+        .carousel {
+            position: relative;
+            background: var(--surface-2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform .3s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            display: grid;
+            place-items: center;
+            aspect-ratio: 16/10;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+            padding: 8px;
+        }
+
+        .carousel-btn {
+            pointer-events: auto;
+            background: rgba(0, 0, 0, .35);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--border);
+        }
+
+        .dot.active {
+            background: var(--brand);
+        }
+
+        /* Offcanvas cart */
+        .offcanvas {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 380px;
+            max-width: 92vw;
+            height: 100vh;
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            z-index: 1002;
+            transition: right .25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .offcanvas.open {
+            right: 0;
+        }
+
+        .offcanvas-header,
+        .offcanvas-footer {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .offcanvas-footer {
+            border-top: 1px solid var(--border);
+            border-bottom: none;
+            margin-top: auto;
+            gap: 8px;
+        }
+
+        .cart-list {
+            padding: 10px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: auto;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            background: var(--surface-2);
+        }
+
+        .qty {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 4px 6px;
+            background: var(--surface);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .strong {
+            font-weight: 800;
+        }
+
+        /* Cards and utilities */
+        .card-flat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .pad {
+            padding: 16px;
+        }
+
+        .pad-lg {
+            padding: 22px;
+        }
+
+        .vspace {
+            height: 18px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+        }
+
+        .icon:hover {
+            background: var(--btn-hover);
+        }
+
+        /* Scroll to top */
+        .to-top {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 1003;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: .2s;
+        }
+
+        .to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Stars for feedback */
+        .stars {
+            display: flex;
+            gap: 6px;
+        }
+
+        .stars button {
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            color: var(--star);
+            opacity: .5;
+        }
+
+        .stars button.active,
+        .stars button:hover,
+        .stars button:hover~button {
+            opacity: 1;
+        }
+
+        /* Small helper for hidden */
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <div class="brand">
+                <div class="logo" aria-label="Tanzeel’s Store logo"></div>
+                <span class="brand-name">Tanzeel’s Store</span>
+            </div>
+
+            <button class="icon-btn hamburger d-lg-none" id="hamburgerBtn" aria-label="Toggle menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
+                </svg>
+                Menu
+            </button>
+
+            <div class="nav-links d-none d-lg-flex" id="navLinks">
+                <a class="nav-link" href="#home">Home</a>
+
+                <div class="dropdown" id="catDropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)">Categories</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#products" data-category="All">All</a>
+                        <a class="dropdown-item" href="#products" data-category="Shoes">Shoes</a>
+                        <a class="dropdown-item" href="#products" data-category="Bags">Bags</a>
+                        <a class="dropdown-item" href="#products" data-category="Clothes">Clothes</a>
+                        <a class="dropdown-item" href="#products" data-category="Tech">Tech</a>
+                    </div>
+                </div>
+
+                <a class="nav-link" href="#profile">My Profile</a>
+                <a class="nav-link" href="#terms">Terms</a>
+                <a class="nav-link" href="#feedback">Feedback</a>
+            </div>
+
+            <div class="right-actions">
+                <button class="icon-btn" id="searchOpen" aria-haspopup="dialog">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 22 22 20l-6.5-6zM9.5 14A4.5 4.5 0 115 9.5 4.5 4.5 0 019.5 14z" />
+                    </svg>
+                    Search
+                </button>
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+                    <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm7-5a1 1 0 011 1h2a1 1 0 110 2h-2a1 1 0 11-2 0 1 1 0 012-1zM4 12a1 1 0 011-1H3a1 1 0 110-2h2a1 1 0 111 1 1 1 0 01-1 1zM5.64 5.64a1 1 0 011.41 0l1.42 1.42a1 1 0 01-1.41 1.41L5.64 7.05a1 1 0 010-1.41zm11.3 11.31a1 1 0 011.41 0l1.42 1.41a1 1 0 11-1.41 1.42l-1.42-1.42a1 1 0 010-1.41zM5.64 18.36a1 1 0 010-1.41l1.42-1.42a1 1 0 111.41 1.41L7.05 18.36a1 1 0 01-1.41 0zM18.36 5.64a1 1 0 010 1.41l-1.42 1.42a1 1 0 01-1.41-1.41l1.42-1.42a1 1 0 011.41 0z" />
+                    </svg>
+                </button>
+                <button class="icon-btn" id="loginOpen" aria-haspopup="dialog">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12a5 5 0 10-5-5 5 5 0 005 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z" />
+                    </svg>
+                    Login/Signup
+                </button>
+                <button class="icon-btn" id="cartOpen" aria-haspopup="dialog">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A2.007 2.007 0 0010 20h10v-2H10l1.1-2h7.45a2 2 0 001.79-1.11l3.58-6.49-1.74-.99L18.55 12H11.1L7 4zM7 20a2 2 0 102 2 2 2 0 00-2-2zm12 0a2 2 0 102 2 2 2 0 00-2-2z" />
+                    </svg>
+                    Cart <span class="badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile dropdown backdrop close -->
+    <div id="navBackdrop" class="hide" style="position:fixed; inset:0; z-index:999;"></div>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-inner container">
+            <h1 class="typewriter" id="typewriter"></h1>
+            <p class="subtitle">Curated products, elegant experience — discover quality across fashion and tech.</p>
+            <div class="cta">
+                <a href="#products" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l4 4h-3v7h-2V6H8l4-4zm7 13v5H5v-5H3v7h18v-7h-2z" />
+                    </svg>
+                    Shop Now
+                </a>
+                <a href="#profile" class="btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12a5 5 0 10-5-5 5 5 0 005 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z" />
+                    </svg>
+                    View Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="section">
+        <div class="container">
+            <div class="section-title">Products</div>
+            <div class="section-sub">Search, sort, and filter by category.</div>
+
+            <div class="filters card-flat pad-lg" style="justify-content:space-between; gap:12px;">
+                <div class="filters" style="gap:8px;">
+                    <button class="pill active" data-filter="All">All</button>
+                    <button class="pill" data-filter="Shoes">Shoes</button>
+                    <button class="pill" data-filter="Bags">Bags</button>
+                    <button class="pill" data-filter="Clothes">Clothes</button>
+                    <button class="pill" data-filter="Tech">Tech</button>
+                </div>
+                <div class="filters" style="gap:8px;">
+                    <input id="searchInput" class="input" type="text" placeholder="Search products..." />
+                    <select id="sortSelect" class="select">
+                        <option value="newest">Newest</option>
+                        <option value="popular">Popular</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="noResults" class="alert hide" style="margin-top:12px;">No products found. Try a different search or
+                filter.</div>
+
+            <div class="vspace"></div>
+            <div id="productGrid" class="grid"></div>
+        </div>
+    </section>
+
+    <!-- Profile -->
+    <section id="profile" class="section">
+        <div class="container">
+            <div class="section-title">My Profile</div>
+            <div class="section-sub">Developer portfolio</div>
+
+            <div class="row">
+                <div class="col-12 col-6">
+                    <div class="card-flat pad-lg" style="display:flex; gap:16px;">
+                        <div
+                            style="width:96px; height:96px; border-radius:16px; overflow:hidden; background: var(--surface-2); display:grid; place-items:center; border:1px solid var(--border);">
+                            <!-- SVG avatar -->
+                            <div
+                                style="width:96px; height:96px; border-radius:16px; overflow:hidden; background: var(--surface-2); display:grid; place-items:center; border:1px solid var(--border);">
+                                <img src="./Gemini_Generated_Image_ojmfrzojmfrzojmf.png" alt="Profile Image"
+                                    style="width:100%; height:100%; object-fit:cover;" />
+                            </div>
+
+                        </div>
+                        <div style="flex:1;">
+                            <div class="strong" style="font-size:20px;">Tanzeel</div>
+                            <div class="muted">Location: Lodhran, Pakistan</div>
+                            <div class="muted">Qualification: B.S. Software Engineering</div>
+                            <div class="vspace"></div>
+                            <div id="objective">Objective: Build delightful, fast, and accessible web experiences.</div>
+                            <div class="vspace"></div>
+                            <div class="chips">
+                                <span class="chip">JavaScript</span>
+                                <span class="chip">HTML5</span>
+                                <span class="chip">CSS3</span>
+                                <span class="chip">UI/UX</span>
+                            </div>
+                            <div class="vspace"></div>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <button class="btn" id="editProfileBtn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.4-.4.4-1.05 0-1.45l-2.34-2.34a1.02 1.02 0 00-1.45 0l-1.83 1.83 3.75 3.75 1.87-1.79z" />
+                                    </svg>
+                                    Edit
+                                </button>
+                                <button class="btn btn-primary" id="downloadCvBtn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7 7-7z" />
+                                    </svg>
+                                    Download CV
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-6">
+                    <div class="card-flat pad-lg">
+                        <div class="strong" style="margin-bottom:8px;">Projects</div>
+                        <div class="chips" style="gap:12px;">
+                            <a class="chip" href="https://tanzeel804.github.io/Ecommerce-site/" target="_blank"
+                                rel="noopener noreferrer">E‑Commerce UI</a>
+                            <a class="chip" href="https://tanzeel804.github.io/Mini-Quiz-Game/" target="_blank"
+                                rel="noopener noreferrer">Animations
+                                Lab</a>
+                            <a class="chip" href="https://tanzeel804.github.io/e.com-site/" target="_blank"
+                                rel="noopener noreferrer">UI Shots</a>
+                        </div>
+                        <div class="vspace"></div>
+                        <div class="muted">More on request.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms -->
+    <section id="terms" class="section">
+        <div class="container">
+            <div class="section-title">Terms & Conditions</div>
+            <div class="section-sub">Please read carefully.</div>
+            <div class="card-flat pad">
+                <div style="max-height: 220px; overflow: auto; line-height:1.7; color: var(--muted);">
+                    Welcome to Tanzeel’s Store. These terms govern your use of this demo site. All content is provided
+                    for
+                    demonstration purposes only. By using this site, you agree not to submit sensitive information and
+                    acknowledge
+                    that products and pricing are fictitious. We reserve the right to modify this demo without notice.
+                    This site
+                    stores data locally in your browser for cart and theme preferences only. No payments are processed.
+                    Any
+                    external links open in a new tab and are provided as-is. Use of this site is at your own discretion.
+                    <br /><br />
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac mauris sed sem congue dapibus.
+                    Curabitur
+                    sit amet nisl ac risus luctus interdum. Vivamus efficitur, justo id dictum scelerisque, mi lorem
+                    luctus elit,
+                    quis imperdiet ligula est non magna. Pellentesque pellentesque sapien id sem feugiat, at ornare nisl
+                    lacinia.
+                    Aenean eleifend lectus eget sem suscipit, et consequat dolor gravida.
+                    <br /><br />
+                    Aliquam posuere est ut arcu feugiat dictum. Praesent commodo magna non feugiat dictum. Vivamus ac
+                    eros
+                    blandit, scelerisque orci sed, gravida neque. Integer fermentum enim non justo scelerisque, id
+                    suscipit ante
+                    finibus. Donec nec pharetra felis, sit amet volutpat neque. Suspendisse potenti.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback -->
+    <section id="feedback" class="section">
+        <div class="container">
+            <div class="section-title">Feedback</div>
+            <div class="section-sub">We’d love to hear from you.</div>
+            <div class="row">
+                <div class="col-12 col-6">
+                    <form id="feedbackForm" class="card-flat pad-lg">
+                        <div style="display:grid; gap:10px;">
+                            <div>
+                                <label class="muted">Name</label>
+                                <input class="input" required type="text" name="name" placeholder="Your name" />
+                            </div>
+                            <div>
+                                <label class="muted">Email</label>
+                                <input class="input" required type="email" name="email" placeholder="you@example.com" />
+                            </div>
+                            <div>
+                                <label class="muted">Rating</label>
+                                <div class="stars" id="feedbackStars" aria-label="Star rating">
+                                    <button type="button" data-star="1">★</button>
+                                    <button type="button" data-star="2">★</button>
+                                    <button type="button" data-star="3">★</button>
+                                    <button type="button" data-star="4">★</button>
+                                    <button type="button" data-star="5">★</button>
+                                </div>
+                                <input type="hidden" name="rating" id="ratingInput" value="5" />
+                            </div>
+                            <div>
+                                <label class="muted">Message</label>
+                                <textarea class="input" style="height: 120px; resize: vertical;" name="message"
+                                    placeholder="Your message"></textarea>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit Feedback</button>
+                            <div id="feedbackSuccess" class="alert hide">Thanks! Your feedback was received.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-6">
+                    <div class="card-flat pad-lg">
+                        <div class="strong" style="margin-bottom:8px;">Contact</div>
+                        <div class="muted">Email: tanzeelahmed412@gmail.com</div>
+                        <div class="muted">Phone: +92 310 1400966</div>
+                        <div class="vspace"></div>
+                        <div class="icons">
+                            <a class="icon" href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                                aria-label="Twitter">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M22 5.8a8.3 8.3 0 01-2.4.7 4.1 4.1 0 001.8-2.3 8.2 8.2 0 01-2.6 1 4.1 4.1 0 00-7 3.7 11.7 11.7 0 01-8.5-4.3 4.1 4.1 0 001.3 5.5 4.1 4.1 0 01-1.9-.5v.1a4.1 4.1 0 003.3 4 4.1 4.1 0 01-1.9.1 4.1 4.1 0 003.8 2.8A8.3 8.3 0 012 19a11.7 11.7 0 006.3 1.8c7.6 0 11.8-6.3 11.8-11.8v-.5A8.4 8.4 0 0022 5.8z" />
+                                </svg>
+                            </a>
+                            <a class="icon" href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                aria-label="GitHub">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.2.8-.6v-2c-3.4.7-4.1-1.6-4.1-1.6-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .1 2 .1 1.2 2 3 1.4 3.7 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.6 0 0 1-.3 3.5 1.3a12 12 0 016.4 0c2.5-1.6 3.5-1.3 3.5-1.3.7 2 .3 3.3.1 3.6.8.9 1.3 2 1.3 3.4 0 4.7-2.9 5.8-5.6 6.1.5.4.9 1.2.9 2.4v3.5c0 .4.2.7.8.6A12 12 0 0012 .5z" />
+                                </svg>
+                            </a>
+                            <a class="icon" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 23h4V7h-4v16zM8 7v16h4v-8c0-2.2 3-2.4 3 0v8h4v-10c0-6.1-6.5-5.9-7-2.9V7H8z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="muted">© <span id="year"></span> Tanzeel’s Store</div>
+            <div class="muted">Built by <a href="#profile">Tanzeel</a></div>
+            <div class="icons">
+                <a class="icon" href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Twitter">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22 5.8a8.3 8.3 0 01-2.4.7 4.1 4.1 0 001.8-2.3 8.2 8.2 0 01-2.6 1 4.1 4.1 0 00-7 3.7 11.7 11.7 0 01-8.5-4.3 4.1 4.1 0 001.3 5.5 4.1 4.1 0 01-1.9-.5v.1a4.1 4.1 0 003.3 4 4.1 4.1 0 01-1.9.1 4.1 4.1 0 003.8 2.8A8.3 8.3 0 012 19a11.7 11.7 0 006.3 1.8c7.6 0 11.8-6.3 11.8-11.8v-.5A8.4 8.4 0 0022 5.8z" />
+                    </svg>
+                </a>
+                <a class="icon" href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.2.8-.6v-2c-3.4.7-4.1-1.6-4.1-1.6-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .1 2 .1 1.2 2 3 1.4 3.7 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.6 0 0 1-.3 3.5 1.3a12 12 0 016.4 0c2.5-1.6 3.5-1.3 3.5-1.3.7 2 .3 3.3.1 3.6.8.9 1.3 2 1.3 3.4 0 4.7-2.9 5.8-5.6 6.1.5.4.9 1.2.9 2.4v3.5c0 .4.2.7.8.6A12 12 0 0012 .5z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <button id="toTop" class="btn btn-primary to-top" aria-label="Scroll to top">↑</button>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Search">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="strong">Search products</div>
+                <button class="icon-btn" data-close="searchModal">Close</button>
+            </div>
+            <div class="modal-body">
+                <input id="searchModalInput" class="input" placeholder="Type and press Enter..." />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="searchSubmitBtn">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Signup Modal (Demo: no passwords collected) -->
+    <div id="loginModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Login or Signup">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="strong">Login / Signup (Demo)</div>
+                <button class="icon-btn" data-close="loginModal">Close</button>
+            </div>
+            <form id="loginForm" class="modal-body">
+                <div class="alert">Heads up: This is a demo. No passwords are collected; enter an email to simulate a
+                    magic
+                    link.</div>
+                <label class="muted">Email</label>
+                <input class="input" type="email" required placeholder="you@example.com" />
+            </form>
+            <div class="modal-footer">
+                <button class="btn" data-close="loginModal">Cancel</button>
+                <button class="btn btn-primary" id="loginSubmitBtn">Send Magic Link (Demo)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Edit Profile">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="strong">Edit Objective</div>
+                <button class="icon-btn" data-close="editModal">Close</button>
+            </div>
+            <div class="modal-body">
+                <label class="muted">Objective</label>
+                <textarea id="objectiveInput" class="input"
+                    style="height:120px;">Build delightful, fast, and accessible web experiences.</textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-close="editModal">Cancel</button>
+                <button class="btn btn-primary" id="saveObjectiveBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Product details">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="strong" id="pmName"></div>
+                <button class="icon-btn" data-close="productModal">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-6">
+                        <div class="carousel" id="pmCarousel">
+                            <div class="carousel-inner" id="pmSlides"></div>
+                            <div class="carousel-nav">
+                                <button class="carousel-btn" id="pmPrev" aria-label="Previous">‹</button>
+                                <button class="carousel-btn" id="pmNext" aria-label="Next">›</button>
+                            </div>
+                        </div>
+                        <div class="dots" id="pmDots"></div>
+                    </div>
+                    <div class="col-12 col-6">
+                        <div class="muted" id="pmBrand"></div>
+                        <div class="rating"><span id="pmStars"></span><span class="muted" id="pmRating"></span></div>
+                        <div class="vspace"></div>
+                        <div class="price" id="pmPrice"></div>
+                        <div class="vspace"></div>
+                        <div id="pmDesc" class="muted"></div>
+                        <div class="vspace"></div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <span class="muted">Qty</span>
+                            <div class="qty">
+                                <button id="pmMinus" class="icon-btn" style="padding:4px 8px;">-</button>
+                                <span id="pmQty" class="strong">1</span>
+                                <button id="pmPlus" class="icon-btn" style="padding:4px 8px;">+</button>
+                            </div>
+                        </div>
+                        <div class="vspace"></div>
+                        <button id="pmAdd" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Cart -->
+    <aside id="cartPanel" class="offcanvas" aria-label="Shopping cart">
+        <div class="offcanvas-header">
+            <div class="strong">Your Cart</div>
+            <button class="icon-btn" id="cartClose">Close</button>
+        </div>
+        <div id="cartList" class="cart-list"></div>
+        <div class="offcanvas-footer">
+            <div>
+                <div class="muted">Total</div>
+                <div class="strong" id="cartTotal">$0.00</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:8px;">
+                <button id="clearCart" class="btn">Clear Cart</button>
+                <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Confetti canvas -->
+    <canvas id="confetti" style="position:fixed; inset:0; pointer-events:none; z-index: 1004;"></canvas>
+
+    <script>
+        // Utility
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+        const toCurrency = (n) => "$" + n.toFixed(2);
+
+        // Theme toggle (persist)
+        (function initTheme() {
+            const saved = localStorage.getItem("theme");
+            if (saved) { document.documentElement.setAttribute("data-theme", saved); }
+            updateThemeIcon();
+            $("#themeToggle").addEventListener("click", () => {
+                const now = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", now);
+                localStorage.setItem("theme", now);
+                updateThemeIcon();
+            });
+            function updateThemeIcon() {
+                const dark = document.documentElement.getAttribute("data-theme") === "dark";
+                $("#themeIcon").innerHTML = dark
+                    ? '<path d="M21.64 13a9 9 0 11-10.63-10.6 7 7 0 1010.63 10.6z"/>'
+                    : '<path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm7-5a1 1 0 011 1h2a1 1 0 110 2h-2a1 1 0 11-2 0 1 1 0 012-1zM4 12a1 1 0 011-1H3a1 1 0 110-2h2a1 1 0 111 1 1 1 0 01-1 1zM5.64 5.64a1 1 0 011.41 0l1.42 1.42a1 1 0 01-1.41 1.41L5.64 7.05a1 1 0 010-1.41zm11.3 11.31a1 1 0 011.41 0l1.42 1.41a1 1 0 11-1.41 1.42l-1.42-1.42a1 1 0 010-1.41zM5.64 18.36a1 1 0 010-1.41l1.42-1.42a1 1 0 111.41 1.41L7.05 18.36a1 1 0 01-1.41 0zM18.36 5.64a1 1 0 010 1.41l-1.42 1.42a1 1 0 01-1.41-1.41l1.42-1.42a1 1 0 011.41 0z"/>';
+            }
+        })();
+
+        // Navbar interactions
+        (function nav() {
+            const links = $("#navLinks");
+            const hamburger = $("#hamburgerBtn");
+            const backdrop = $("#navBackdrop");
+            const dropWrap = $("#catDropdown");
+            const toggle = dropWrap.querySelector(".dropdown-toggle");
+
+            hamburger.addEventListener("click", () => {
+                links.classList.toggle("open");
+                backdrop.classList.toggle("hide");
+            });
+            backdrop.addEventListener("click", () => {
+                links.classList.remove("open"); backdrop.classList.add("hide");
+            });
+            toggle.addEventListener("click", () => dropWrap.classList.toggle("open"));
+            document.addEventListener("click", (e) => {
+                if (!dropWrap.contains(e.target) && !toggle.contains(e.target)) { dropWrap.classList.remove("open"); }
+            });
+            $$(".dropdown-item", dropWrap).forEach(a => {
+                a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const cat = a.getAttribute("data-category");
+                    setFilter(cat);
+                    document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+                    dropWrap.classList.remove("open");
+                    links.classList.remove("open"); backdrop.classList.add("hide");
+                });
+            });
+        })();
+
+        // Typewriter
+        (function typewriter() {
+            const el = $("#typewriter");
+            const phrases = [
+                "Discover, Shop & Explore...",
+                "Your One‑Stop Shopping Destination...",
+                "Style + Tech, perfectly curated...",
+                "Quality products. Smooth experience."
+            ];
+            let i = 0, j = 0, deleting = false;
+            function tick() {
+                const word = phrases[i];
+                el.textContent = word.substring(0, j);
+                if (!deleting && j < word.length) { j++; }
+                else if (deleting && j > 0) { j--; }
+                else {
+                    if (!deleting) { setTimeout(() => deleting = true, 900); }
+                    else { deleting = false; i = (i + 1) % phrases.length; }
+                }
+                const delay = deleting ? 40 : 70;
+                setTimeout(tick, delay);
+            }
+            tick();
+        })();
+
+        // Products data (20 items)
+        const products = (() => {
+            const now = Date.now();
+            const days = (d) => now - d * 24 * 60 * 60 * 1000;
+            let id = 1;
+            const mk = (name, brand, desc, price, rating, category, daysAgo, imgFallbacks) => ({
+                id: id++,
+                name, brand, description: desc,
+                price, rating, category,
+                dateAdded: days(daysAgo),
+                images: imgFallbacks // will be replaced by real images after fetch
+            });
+            const fallbackImgs = [
+                // initial placeholders (will be swapped by fetch)
+                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+                "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879_.jpg",
+                "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+            ];
+            return [
+                mk("Runner Pro X", "Stride", "Lightweight running shoes for daily miles.", 89.99, 4.6, "Shoes", 2, fallbackImgs),
+                mk("Urban Leather", "CarryCo", "Premium leather bag for work & travel.", 129.50, 4.7, "Bags", 6, fallbackImgs),
+                mk("Aero Hoodie", "NorthWear", "Breathable hoodie with cozy interior.", 59.00, 4.4, "Clothes", 1, fallbackImgs),
+                mk("Noise‑Cancel Headset", "SonicLab", "Immersive sound, all‑day comfort.", 149.99, 4.8, "Tech", 3, fallbackImgs),
+                mk("Trail Grip", "Stride", "All‑terrain shoes for outdoor runs.", 99.95, 4.5, "Shoes", 9, fallbackImgs),
+                mk("City Tote", "CarryCo", "Organized tote with padded sleeve.", 89.00, 4.2, "Bags", 15, fallbackImgs),
+                mk("Classic Tee", "NorthWear", "Ultra‑soft cotton tee, everyday fit.", 19.99, 4.1, "Clothes", 20, fallbackImgs),
+                mk("Smartwatch S2", "Chrono", "Fitness tracking with 7‑day battery.", 199.00, 4.6, "Tech", 5, fallbackImgs),
+                mk("Flex Runner", "Stride", "Responsive cushioning, secure fit.", 79.99, 4.3, "Shoes", 13, fallbackImgs),
+                mk("Sling Mini", "CarryCo", "Compact sling for essentials.", 39.00, 4.0, "Bags", 12, fallbackImgs),
+                mk("Denim Jacket", "NorthWear", "Timeless style with modern cut.", 75.00, 4.2, "Clothes", 7, fallbackImgs),
+                mk("Wireless Charger", "Volt", "Fast charging with smart cooling.", 29.99, 4.4, "Tech", 8, fallbackImgs),
+                mk("Hiker Max", "Stride", "Supportive shoes for long treks.", 119.00, 4.7, "Shoes", 4, fallbackImgs),
+                mk("Executive Brief", "CarryCo", "Sleek briefcase, durable build.", 149.00, 4.6, "Bags", 10, fallbackImgs),
+                mk("Athletic Shorts", "NorthWear", "Quick‑dry, lightweight comfort.", 24.99, 4.3, "Clothes", 18, fallbackImgs),
+                mk("Bluetooth Speaker", "SonicLab", "Rich bass in a compact body.", 59.99, 4.5, "Tech", 11, fallbackImgs),
+                mk("Court Classic", "Stride", "Retro look, modern cushioning.", 69.00, 4.1, "Shoes", 16, fallbackImgs),
+                mk("Travel Duffel", "CarryCo", "Spacious & sturdy weekender.", 99.00, 4.5, "Bags", 19, fallbackImgs),
+                mk("Thermal Jacket", "NorthWear", "Warmth without the bulk.", 129.99, 4.6, "Clothes", 14, fallbackImgs),
+                mk("4K Action Cam", "Volt", "Stabilized footage, waterproof.", 249.00, 4.8, "Tech", 2, fallbackImgs)
+            ];
+        })();
+
+        // Try to fetch real product images from Fake Store API and assign to our products
+        async function loadFakeImages() {
+            try {
+                const res = await fetch("https://fakestoreapi.com/products?limit=20");
+                const data = await res.json();
+                const imgs = Array.isArray(data) ? data.map(d => d.image).filter(Boolean) : [];
+                if (imgs.length) {
+                    products.forEach((p, idx) => {
+                        const url = imgs[idx % imgs.length];
+                        // assign 3 slides using the same image (for demo). If available, rotate nearby for variety.
+                        const url2 = imgs[(idx + 1) % imgs.length];
+                        const url3 = imgs[(idx + 2) % imgs.length];
+                        p.images = [url, url2, url3];
+                    });
+                    renderProducts(); // re-render to show real images
+                }
+            } catch (err) {
+                console.warn("Fake Store images failed to load. Using fallbacks.", err);
+            }
+        }
+
+        // State
+        let filterCategory = "All";
+        let searchTerm = "";
+        let sortBy = "newest";
+        let cart = [];
+        let currentProduct = null;
+        let currentSlide = 0;
+
+        // Render products
+        function renderProducts() {
+            const grid = $("#productGrid");
+            let list = products.slice();
+
+            // Filter category
+            if (filterCategory !== "All") {
+                list = list.filter(p => p.category === filterCategory);
+            }
+            // Search
+            if (searchTerm.trim() !== "") {
+                const q = searchTerm.trim().toLowerCase();
+                list = list.filter(p => (p.name + " " + p.brand + " " + p.description).toLowerCase().includes(q));
+            }
+            // Sort
+            if (sortBy === "popular") {
+                list.sort((a, b) => b.rating - a.rating);
+            } else if (sortBy === "price-asc") {
+                list.sort((a, b) => a.price - b.price);
+            } else if (sortBy === "price-desc") {
+                list.sort((a, b) => b.price - a.price);
+            } else { // newest
+                list.sort((a, b) => b.dateAdded - a.dateAdded);
+            }
+
+            $("#noResults").classList.toggle("hide", list.length > 0);
+            grid.innerHTML = "";
+
+            list.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "card";
+                const imgSrc = (p.images && p.images[0]) ? p.images[0] : "";
+                card.innerHTML = `
+          <div class="card-media">
+            <img src="${imgSrc}" alt="${p.name} preview" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"/>
+          </div>
+          <div class="card-body">
+            <div class="strong">${p.name}</div>
+            <div class="brand">${p.brand} • <span class="muted">${p.category}</span></div>
+            <div class="rating">
+              ${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}
+              <span class="muted">(${p.rating.toFixed(1)})</span>
+            </div>
+            <div class="price">${toCurrency(p.price)}</div>
+            <div class="actions">
+              <button class="btn" data-details="${p.id}">Quick View</button>
+              <button class="btn btn-primary" data-add="${p.id}">Add to Cart</button>
+            </div>
+          </div>
+        `;
+                grid.appendChild(card);
+            });
+
+            // Attach handlers
+            $$(".btn", grid).forEach(btn => {
+                if (btn.dataset.add) {
+                    btn.addEventListener("click", (e) => {
+                        const id = Number(btn.dataset.add);
+                        addToCart(id, 1, e);
+                    });
+                } else if (btn.dataset.details) {
+                    btn.addEventListener("click", () => {
+                        const id = Number(btn.dataset.details);
+                        openProductModal(id);
+                    });
+                }
+            });
+        }
+
+        // Filters UI
+        function setFilter(cat) {
+            filterCategory = cat;
+            $$(".pill").forEach(p => p.classList.toggle("active", p.dataset.filter === cat));
+            renderProducts();
+        }
+        $$(".pill").forEach(p => p.addEventListener("click", () => setFilter(p.dataset.filter)));
+        $("#searchInput").addEventListener("input", (e) => { searchTerm = e.target.value; renderProducts(); });
+        $("#sortSelect").addEventListener("change", (e) => { sortBy = e.target.value; renderProducts(); });
+
+        // Search modal
+        (function searchModal() {
+            $("#searchOpen").addEventListener("click", () => openModal("searchModal", () => $("#searchModalInput").focus()));
+            $("#searchSubmitBtn").addEventListener("click", submitSearch);
+            $("#searchModalInput").addEventListener("keydown", (e) => { if (e.key === "Enter") { submitSearch(); } });
+            function submitSearch() {
+                searchTerm = $("#searchModalInput").value;
+                closeModal("searchModal");
+                $("#searchInput").value = searchTerm;
+                renderProducts();
+                document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+            }
+        })();
+
+        // Login demo
+        (function loginDemo() {
+            $("#loginOpen").addEventListener("click", () => openModal("loginModal"));
+            $("#loginSubmitBtn").addEventListener("click", (e) => {
+                e.preventDefault();
+                alert("Demo: Magic link sent! (not really)");
+                closeModal("loginModal");
+            });
+        })();
+
+        // Edit profile
+        (function editProfile() {
+            $("#editProfileBtn").addEventListener("click", () => {
+                $("#objectiveInput").value = $("#objective").textContent.replace(/^Objective:\s*/, "");
+                openModal("editModal", () => $("#objectiveInput").focus());
+            });
+            $("#saveObjectiveBtn").addEventListener("click", () => {
+                const text = $("#objectiveInput").value.trim() || "Build delightful, fast, and accessible web experiences.";
+                $("#objective").textContent = "Objective: " + text;
+                closeModal("editModal");
+            });
+            // Download CV
+            $("#downloadCvBtn").addEventListener("click", () => {
+                const content = [
+                    "Tanzeel — Frontend Developer",
+                    "Location: Karachi, Pakistan",
+                    "Qualification: B.S. Computer Science",
+                    "",
+                    "Objective:",
+                    "Build delightful, fast, and accessible web experiences.",
+                    "",
+                    "Skills: JavaScript, HTML5, CSS3, UI/UX",
+                    "Projects: E‑Commerce UI, Animations Lab, UI Shots"
+                ].join("\n");
+                const blob = new Blob([content], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "Tanzeel_CV.txt";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+            });
+        })();
+
+        // Generic modal open/close
+        function openModal(id, onOpen) {
+            const m = document.getElementById(id);
+            m.classList.add("show");
+            m.style.display = "flex";
+            setTimeout(() => $(".modal", m).classList.add("show"), 10);
+            const backdropClick = (e) => { if (e.target === m) { closeModal(id); } };
+            m.addEventListener("click", backdropClick);
+            $$("[data-close='" + id + "']").forEach(btn => btn.addEventListener("click", () => closeModal(id), { once: true }));
+            if (onOpen) setTimeout(onOpen, 60);
+        }
+        function closeModal(id) {
+            const m = document.getElementById(id);
+            if (!m) return;
+            $(".modal", m).classList.remove("show");
+            setTimeout(() => { m.classList.remove("show"); m.style.display = "none"; }, 150);
+        }
+
+        // Product modal
+        function openProductModal(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            currentProduct = prod;
+            currentSlide = 0;
+            $("#pmName").textContent = prod.name;
+            $("#pmBrand").textContent = prod.brand + " • " + prod.category;
+            $("#pmPrice").textContent = toCurrency(prod.price);
+            $("#pmDesc").textContent = prod.description;
+            $("#pmRating").textContent = prod.rating.toFixed(1);
+            $("#pmStars").textContent = "★".repeat(Math.round(prod.rating)) + "☆".repeat(5 - Math.round(prod.rating));
+            $("#pmQty").textContent = "1";
+            const slides = $("#pmSlides");
+            slides.innerHTML = "";
+            prod.images.forEach(src => {
+                const d = document.createElement("div");
+                d.className = "carousel-item";
+                d.innerHTML = `<img src="${src}" alt="${prod.name}" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">`;
+                slides.appendChild(d);
+            });
+            const dots = $("#pmDots");
+            dots.innerHTML = "";
+            (prod.images || []).forEach((_, i) => {
+                const dot = document.createElement("div");
+                dot.className = "dot" + (i === 0 ? " active" : "");
+                dot.addEventListener("click", () => gotoSlide(i));
+                dots.appendChild(dot);
+            });
+            updateCarousel();
+            $("#pmPrev").onclick = () => gotoSlide(currentSlide - 1);
+            $("#pmNext").onclick = () => gotoSlide(currentSlide + 1);
+            $("#pmMinus").onclick = () => { const q = Math.max(1, parseInt($("#pmQty").textContent) - 1); $("#pmQty").textContent = q; };
+            $("#pmPlus").onclick = () => { const q = parseInt($("#pmQty").textContent) + 1; $("#pmQty").textContent = q; };
+            $("#pmAdd").onclick = (e) => addToCart(prod.id, parseInt($("#pmQty").textContent), e);
+            openModal("productModal");
+        }
+        function gotoSlide(i) {
+            const total = currentProduct ? (currentProduct.images || []).length : 0;
+            if (!total) return;
+            currentSlide = (i + total) % total;
+            updateCarousel();
+        }
+        function updateCarousel() {
+            const inner = $("#pmSlides");
+            inner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            $$(".dot", $("#pmDots")).forEach((d, idx) => d.classList.toggle("active", idx === currentSlide));
+        }
+
+        // Cart
+        function addToCart(id, qty = 1, eventForConfetti = null) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            const existing = cart.find(c => c.id === id);
+            if (existing) { existing.qty += qty; }
+            else { cart.push({ id, qty }); }
+            updateCartUI();
+            if (eventForConfetti) {
+                const rect = eventForConfetti.target.getBoundingClientRect();
+                spawnConfetti(rect.left + rect.width / 2, rect.top);
+            }
+        }
+        function updateCartUI() {
+            // Count
+            const count = cart.reduce((a, c) => a + c.qty, 0);
+            $("#cartCount").textContent = count;
+            // List
+            const wrap = $("#cartList");
+            wrap.innerHTML = "";
+            cart.forEach(item => {
+                const p = products.find(x => x.id === item.id);
+                const node = document.createElement("div");
+                node.className = "cart-item";
+                node.innerHTML = `
+          <div style="width:56px; height:56px; overflow:hidden; border-radius:8px; border:1px solid var(--border); background: var(--surface);">
+            <img src="${(p.images && p.images[0]) || ''}" alt="${p.name}" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"/>
+          </div>
+          <div>
+            <div class="strong">${p.name}</div>
+            <div class="muted">${p.brand}</div>
+            <div class="muted">${toCurrency(p.price)}</div>
+          </div>
+          <div style="display:grid; gap:6px; justify-items:end;">
+            <div class="qty">
+              <button class="icon-btn" data-dec="${p.id}" style="padding:2px 6px;">-</button>
+              <span class="strong">${item.qty}</span>
+              <button class="icon-btn" data-inc="${p.id}" style="padding:2px 6px;">+</button>
+            </div>
+            <button class="icon-btn" data-remove="${p.id}" style="padding:4px 8px;">Remove</button>
+          </div>
+        `;
+                wrap.appendChild(node);
+            });
+            // Total
+            const total = cart.reduce((sum, item) => {
+                const p = products.find(x => x.id === item.id); return sum + p.price * item.qty;
+            }, 0);
+            $("#cartTotal").textContent = toCurrency(total);
+
+            // Handlers
+            $("[id='cartList']").querySelectorAll("[data-inc]").forEach(b => b.onclick = () => { const it = cart.find(x => x.id === Number(b.dataset.inc)); it.qty++; updateCartUI(); });
+            $("[id='cartList']").querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const it = cart.find(x => x.id === Number(b.dataset.dec)); it.qty = Math.max(1, it.qty - 1); updateCartUI(); });
+            $("[id='cartList']").querySelectorAll("[data-remove]").forEach(b => b.onclick = () => { cart = cart.filter(x => x.id !== Number(b.dataset.remove)); updateCartUI(); });
+
+            // Persist to localStorage
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+        // Load cart from storage
+        (function () {
+            try {
+                const saved = JSON.parse(localStorage.getItem("cart") || "[]");
+                if (Array.isArray(saved)) { cart = saved; updateCartUI(); }
+            } catch (e) { }
+        })();
+
+        // Offcanvas controls
+        (function cartPanel() {
+            $("#cartOpen").addEventListener("click", () => $("#cartPanel").classList.add("open"));
+            $("#cartClose").addEventListener("click", () => $("#cartPanel").classList.remove("open"));
+            $("#clearCart").addEventListener("click", () => { cart = []; updateCartUI(); });
+            $("#checkoutBtn").addEventListener("click", () => {
+                if (cart.length === 0) return alert("Your cart is empty.");
+                alert("Demo checkout — no real payment processed.");
+            });
+        })();
+
+        // Feedback
+        (function feedback() {
+            let rating = 5;
+            const ratingInput = $("#ratingInput");
+            $$("#feedbackStars button").forEach(btn => {
+                btn.addEventListener("mouseenter", () => highlight(btn.dataset.star));
+                btn.addEventListener("click", () => { rating = Number(btn.dataset.star); ratingInput.value = rating; highlight(rating); });
+            });
+            function highlight(n) {
+                $$("#feedbackStars button").forEach(b => b.classList.toggle("active", Number(b.dataset.star) <= Number(n)));
+            }
+            highlight(rating);
+            $("#feedbackForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                $("#feedbackSuccess").classList.remove("hide");
+                setTimeout(() => $("#feedbackSuccess").classList.add("hide"), 2200);
+                e.target.reset(); rating = 5; ratingInput.value = 5; highlight(5);
+            });
+        })();
+
+        // To top button
+        (function toTop() {
+            const btn = $("#toTop");
+            window.addEventListener("scroll", () => {
+                const scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+                btn.classList.toggle("show", scrolled > 120);
+            });
+            btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        })();
+
+        // Year
+        $("#year").textContent = new Date().getFullYear();
+
+        // Initial render + load real images
+        renderProducts();
+        loadFakeImages();
+
+        // Search button prefill
+        $("#searchOpen").addEventListener("click", () => $("#searchModalInput").value = (document.getElementById("searchInput").value || ""));
+
+        // Confetti
+        const confettiCanvas = $("#confetti");
+        const ctx = confettiCanvas.getContext("2d");
+        let confettiPieces = [];
+        function onResize() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", onResize); onResize();
+
+        function spawnConfetti(x, y) {
+            for (let i = 0; i < 80; i++) {
+                confettiPieces.push({
+                    x, y,
+                    vx: (Math.random() * 2 - 1) * 4,
+                    vy: Math.random() * -6 - 3,
+                    size: Math.random() * 6 + 4,
+                    color: ["#7c5cff", "#22d3ee", "#16a34a", "#f59e0b", "#ef4444"][Math.floor(Math.random() * 5)],
+                    life: 0, rot: Math.random() * Math.PI, vr: (Math.random() * 2 - 1) * 0.2
+                });
+            }
+        }
+        function animateConfetti() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confettiPieces = confettiPieces.filter(p => p.life < 130);
+            for (const p of confettiPieces) {
+                p.life++;
+                p.vy += 0.15;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rot += p.vr;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = Math.max(0, 1 - p.life / 130);
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+                ctx.restore();
+            }
+            requestAnimationFrame(animateConfetti);
+        }
+        animateConfetti();
+
+        // Global close handlers for modals
+        $$(".modal-backdrop").forEach(m => {
+            m.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(m.id); });
+        });
+
+        // Click on logo brings to top
+        $(".logo").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9847ea2cc12390aa',t:'MTc1ODc3NTk3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
